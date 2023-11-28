@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bookworm
 
 RUN apt-get -y update && apt-get -y install nginx dumb-init; \
     apt-get -y install openssl; \
