@@ -1,4 +1,4 @@
-From debian:bookworm
+FROM debian:bookworm
 
 RUN apt-get -y update && apt-get -y install mariadb-server -y
 
