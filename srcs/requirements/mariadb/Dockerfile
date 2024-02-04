@@ -1,11 +1,11 @@
 FROM debian:bookworm
 
-RUN apt-get -y update && apt-get -y install mariadb-server -y
+RUN apt-get update -y && apt-get install -y mariadb-server
+
+COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+
+COPY ./tools/init.sh /usr/local/bin/init.sh
 
 EXPOSE 3306
 
-COPY ./tools/init.sh /tmp/init.sh
-
-RUN chmod +x /tmp/init.sh
-
-CMD [ "/tmp/init.sh" ]
+CMD ["sh", "/usr/local/bin/init.sh"]

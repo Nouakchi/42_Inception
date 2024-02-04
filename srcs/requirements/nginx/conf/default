@@ -1,5 +1,10 @@
 server {
-    listen 8080;
+    listen 443 ssl;
+
+    ssl_certificate /etc/ssl/certs/localhost.crt;
+    ssl_certificate_key /etc/ssl/private/localhost.key;
+    ssl_protocols TLSv1.3;
+
     server_name localhost;
     root /var/www/html/;
     index index.html;
