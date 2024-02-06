@@ -1,3 +1,5 @@
+#!/bin/bash
+
 service mariadb start;
 
 mariadb -u root -p"$SQL_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
