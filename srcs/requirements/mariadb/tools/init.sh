@@ -1,6 +1,17 @@
 #!/bin/bash
 
 service mariadb start;
+sleep 5
+mysql_secure_installation << EOF
+n
+$SQL_PASSWORD
+$SQL_PASSWORD
+y
+n
+n
+n
+n
+EOF
 
 mariadb -u root -p"$SQL_ROOT_PASSWORD" -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 mariadb -u root -p"$SQL_ROOT_PASSWORD" -e "CREATE USER IF NOT EXISTS \`${SQL_USER}\`@'localhost' IDENTIFIED BY '${SQL_PASSWORD}';"
@@ -9,6 +20,5 @@ mariadb -u root -p"$SQL_ROOT_PASSWORD" -e "ALTER USER 'root'@'localhost' IDENTIF
 mariadb -u root -p"$SQL_ROOT_PASSWORD" -e "FLUSH PRIVILEGES;"
 
 mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown;
-service mariadb stop;
 
-exec mysqld;
+exec mariadbd;

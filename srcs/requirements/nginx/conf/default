@@ -1,11 +1,9 @@
 server {
 
-    # include /etc/nginx/mime.types;
-
     listen 443 ssl;
 
-    ssl_certificate /etc/ssl/certs/localhost.crt;
-    ssl_certificate_key /etc/ssl/private/localhost.key;
+    ssl_certificate certpath/localhost.crt;
+    ssl_certificate_key keypath/localhost.key;
     ssl_protocols TLSv1.3;
 
     server_name localhost;
@@ -17,10 +15,10 @@ server {
     }
 
     location ~ \.php$ {
-	    fastcgi_pass wordpress:9000; #PHP for wordpress will listen on the port 9000
 	    fastcgi_index index.php;
 	    include fastcgi.conf;
-	    # fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	    fastcgi_pass wordpress:9000; #PHP for wordpress will listen on the port 9000
+	    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
 	    # fastcgi_param SCRIPT_NAME $fastcgi_script_name;
     }
 }

@@ -8,8 +8,10 @@ RUN apt-get update -y && apt-get install -y nginx  \
 
 COPY ./conf/default /etc/nginx/sites-available/default
 
-COPY ./tools/index.html /var/www/html/index.html
+COPY ./tools/init.sh /usr/local/bin/
+
+RUN chmod +x /usr/local/bin/init.sh
 
 EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["/usr/local/bin/init.sh"]

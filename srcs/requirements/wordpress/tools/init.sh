@@ -1,7 +1,5 @@
 #!/bin/bash
 
-pwd;
-
 sleep 10;
 
 cd /var/www/wordpress
@@ -14,13 +12,13 @@ wp config create	--allow-root \
 					--path='/var/www/wordpress'
 
 wp core install		--allow-root \
-					--title=Example \
-					--admin_user=$SQL_USER \
+					--title=$TITLE \
+					--admin_user=$USER1 \
 					--admin_password=$SQL_PASSWORD \
-					--admin_email=info@example.com \
+					--admin_email=$USER1_MAIL \
+					--url=localhost	\
 					--path='/var/www/wordpress' \
-					--url='localhost'
 
-wp user create bob bob@example.com --allow-root --role=author --user_pass=bob_pass
+wp user create $USER2 $USER2_MAIL --allow-root --role=author --user_pass=$SQL_PASSWORD
 
 exec /usr/sbin/php-fpm8.2 -F
